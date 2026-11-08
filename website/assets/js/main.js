@@ -54,13 +54,17 @@
       if (finished) return;
       var elapsed = performance.now() - started;
       var timeRatio = clamp(elapsed / MIN_TIME, 0, 1);
-      var target = loaded ? 100 : Math.min(92, timeRatio * 92);
-      progress = lerp(progress, target, target > progress ? 0.14 : 0.3);
-      if (loaded && timeRatio >= 1) progress = Math.min(100, progress + 1.6);
-      if (progress > 99.4) progress = 100;
+      var target;
+      if (elapsed < MIN_TIME) {
+        target = 10 + timeRatio * 84;            // creep to 94% while booting
+      } else {
+        target = loaded ? 100 : 95;              // only finish once loaded
+      }
+      progress = lerp(progress, target, 0.13);
+      if (progress > 99.5) progress = 100;
       paint();
       if (progress >= 100) {
-        setTimeout(finish, reduceMotion ? 60 : 320);
+        setTimeout(finish, reduceMotion ? 60 : 300);
         return;
       }
       raf(tick);

@@ -129,6 +129,20 @@ Full changelogs are on the [Releases](https://github.com/craftstudioteam/CS-LAUN
 
 <br>
 
+## Website
+
+The marketing site for AZYRON CLIENT lives in [`website/`](website/) — a hand-built,
+dependency-free static page with a dark violet/silver identity, animated loader, particle
+field, live FPS benchmark, HUD preview, screenshot lightbox and Discord section.
+
+```bash
+python3 -m http.server 5173 --directory website   # → http://localhost:5173
+```
+
+See [`website/README.md`](website/README.md) for structure, customisation and deployment notes.
+
+<br>
+
 ## Support and community
 
 - **Discord:** https://discord.gg/dmteYqZZyY — help, announcements and feedback

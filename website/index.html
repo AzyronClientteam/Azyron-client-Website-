@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en" class="is-loading">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AZYRON CLIENT — Unleash Your Minecraft Experience</title>
+<meta name="description" content="AZYRON CLIENT is a premium Minecraft: Java Edition client built for raw frames, buttery-smooth gameplay and a HUD that finally feels like yours. Download for Android, crafted by JIGNESH GAMING.">
+<meta name="theme-color" content="#050309">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://azyronclient.com/">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AZYRON CLIENT">
+<meta property="og:title" content="AZYRON CLIENT — Unleash Your Minecraft Experience">
+<meta property="og:description" content="A premium Minecraft: Java Edition client engineered for raw FPS, zero stutter and a fully modular HUD.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AZYRON CLIENT — Unleash Your Minecraft Experience">
+<meta name="twitter:description" content="A premium Minecraft: Java Edition client engineered for raw FPS, zero stutter and a fully modular HUD.">
+<meta name="twitter:image" content="assets/img/og.jpg">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="icon" href="assets/img/favicon-180.png" sizes="180x180" type="image/png">
+
+<link rel="preload" href="assets/fonts/chakra-petch-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/hero.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AZYRON CLIENT",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Android 8.0+",
+  "description": "Premium Minecraft: Java Edition client optimised for FPS, smooth gameplay and custom HUD.",
+  "author": { "@type": "Person", "name": "JIGNESH GAMING" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+</head>
+
+<body>
+<!-- shared svg gradients -->
+<svg class="svg-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <linearGradient id="gradSilver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F6FC"/>
+      <stop offset=".42" stop-color="#C9CEE0"/>
+      <stop offset=".62" stop-color="#848BA3"/>
+      <stop offset="1" stop-color="#E9ECF7"/>
+    </linearGradient>
+    <linearGradient id="gradNeon" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#6D28D9"/>
+      <stop offset=".5" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#DCC2FF"/>
+    </linearGradient>
+    <linearGradient id="gradMark" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".55" stop-color="#C9CEE0"/>
+      <stop offset="1" stop-color="#7E849C"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ============ LOADING SCREEN ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__grid"></div>
+  <div class="loader__inner">
+    <div class="loader__mark">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path class="loader__hex" d="M32 2.6 59 17.3v29.4L32 61.4 5 46.7V17.3Z" fill="none" stroke="url(#gradSilver)" stroke-width="1.6"/>
+        <path class="loader__glyph" d="M22 46.6 32 15.2l10 31.4" fill="none" stroke="url(#gradNeon)" stroke-width="5.4" stroke-linejoin="miter"/>
+        <path class="loader__glyph2" d="M26.2 35.4h11.6" fill="none" stroke="url(#gradNeon)" stroke-width="4.6"/>
+        <path class="loader__spark" d="M32 2.6 35.4 12 32 15.2 28.6 12Z" fill="#DCC2FF"/>
+      </svg>
+    </div>
+    <p class="loader__brand">AZYRON<span>CLIENT</span></p>
+    <div class="loader__bar"><span class="loader__fill" id="loaderFill"></span></div>
+    <div class="loader__meta">
+      <span class="loader__status" id="loaderStatus">BOOTING CORE</span>
+      <span class="loader__pct" id="loaderPct">00%</span>
+    </div>
+  </div>
+  <p class="loader__foot"><span>JIGNESH GAMING</span><span>MINECRAFT · JAVA EDITION</span></p>
+</div>
+
+<!-- page transition curtain -->
+<div class="curtain" id="curtain" aria-hidden="true"><span class="curtain__mark">AZYRON</span></div>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"><span></span></div>
+
+<!-- cursor glow -->
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__ring"></span><span class="cursor__dot"></span></div>
+
+<!-- ============ BACKGROUND FX ============ -->
+<div class="bg" aria-hidden="true">
+  <canvas id="particles" class="bg__canvas"></canvas>
+  <div class="bg__grid"></div>
+  <div class="bg__noise"></div>
+  <div class="bg__vignette"></div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-head" id="siteHead">
+  <div class="site-head__inner">
+    <a class="brand" href="#home" aria-label="AZYRON CLIENT — home">
+      <span class="brand__mark">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 2.6 59 17.3v29.4L32 61.4 5 46.7V17.3Z" fill="rgba(168,85,247,.07)" stroke="url(#gradSilver)" stroke-width="1.7"/>
+          <path d="M22 46.6 32 15.2l10 31.4" fill="none" stroke="url(#gradNeon)" stroke-width="5.4"/>
+          <path d="M26.2 35.4h11.6" fill="none" stroke="url(#gradNeon)" stroke-width="4.6"/>
+        </svg>
+      </span>
+      <span class="brand__text">AZYRON<em>CLIENT</em></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link is-active" href="#home"><span>Home</span></a></li>
+        <li><a class="nav__link" href="#features"><span>Features</span></a></li>
+        <li><a class="nav__link" href="#performance"><span>Performance</span></a></li>
+        <li><a class="nav__link" href="#screenshots"><span>Screenshots</span></a></li>
+        <li><a class="nav__link" href="#download"><span>Download</span></a></li>
+        <li><a class="nav__link" href="#faq"><span>FAQ</span></a></li>
+      </ul>
+      <div class="nav__mobile-cta">
+        <a class="btn btn--primary btn--block" href="#download">
+          <span class="btn__label">Download Client</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--block" href="https://discord.gg/azyron" target="_blank" rel="noopener">
+          <span class="btn__label">Join Discord</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="site-head__actions">
+      <a class="head-discord" href="https://discord.gg/azyron" target="_blank" rel="noopener" aria-label="Join the AZYRON Discord">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 8.4a9.9 9.9 0 0 1 6.8 0M8.3 15.6a7.8 7.8 0 0 0 7.4 0M9.1 13.4a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm5.8 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15.8 5.2A13 13 0 0 0 12 4.4a13 13 0 0 0-3.8.8C5.5 8.2 5 11.4 5 14.4a12 12 0 0 0 3.6 1.8l.7-1.2m6.4-9.8c2.7 3 3.2 6.2 3.2 9.2a12 12 0 0 1-3.6 1.8l-.7-1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Discord</span>
+      </a>
+      <a class="btn btn--primary btn--sm" href="#download">
+        <span class="btn__label">Download</span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="home">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__img" data-parallax="0.18">
+        <picture>
+          <source srcset="assets/img/hero.webp" type="image/webp">
+          <img src="assets/img/hero.jpg" alt="" width="1376" height="768" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+      <div class="hero__scrim"></div>
+      <div class="hero__scan"></div>
+    </div>
+
+    <!-- floating minecraft blocks -->
+    <div class="blocks" aria-hidden="true">
+      <div class="block block--amethyst block--1" data-parallax="-0.06"><div class="cube"><i class="cube__f cube__f--top"></i><i class="cube__f cube__f--left"></i><i class="cube__f cube__f--right"></i></div></div>
+      <div class="block block--obsidian block--2" data-parallax="0.1"><div class="cube"><i class="cube__f cube__f--top"></i><i class="cube__f cube__f--left"></i><i class="cube__f cube__f--right"></i></div></div>
+      <div class="block block--quartz block--3" data-parallax="-0.14"><div class="cube"><i class="cube__f cube__f--top"></i><i class="cube__f cube__f--left"></i><i class="cube__f cube__f--right"></i></div></div>
+      <div class="block block--amethyst block--4" data-parallax="0.06"><div class="cube"><i class="cube__f cube__f--top"></i><i class="cube__f cube__f--left"></i><i class="cube__f cube__f--right"></i></div></div>
+      <div class="block block--quartz block--5" data-parallax="0.16"><div class="cube"><i class="cube__f cube__f--top"></i><i class="cube__f cube__f--left"></i><i class="cube__f cube__f--right"></i></div></div>
+      <div class="block block--obsidian block--6" data-parallax="-0.1"><div class="cube"><i class="cube__f cube__f--top"></i><i class="cube__f cube__f--left"></i><i class="cube__f cube__f--right"></i></div></div>
+    </div>
+
+    <div class="hero__side hero__side--left" aria-hidden="true">
+      <span>EST. 2024</span><i></i><span>JIGNESH GAMING</span>
+    </div>
+    <div class="hero__side hero__side--right" aria-hidden="true">
+      <span>JAVA EDITION</span><i></i><span>1.21.11 READY</span>
+    </div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow" data-hero="1">
+        <span class="tag-dot"></span>
+        PREMIUM MINECRAFT: JAVA CLIENT
+        <span class="hero__eyebrow-line"></span>
+      </p>
+
+      <h1 class="hero__title" data-hero="2">
+        <span class="hero__word">AZYRON</span>
+        <span class="hero__word hero__word--alt">CLIENT</span>
+      </h1>
+
+      <p class="hero__tagline" data-hero="4">UNLEASH YOUR MINECRAFT EXPERIENCE.</p>
+
+      <p class="hero__sub" data-hero="5">
+        A dark-forged client engineered for raw frames, razor hit registration and a
+        HUD that bends to <em>your</em> playstyle. Built for players who refuse to settle.
+      </p>
+
+      <div class="hero__cta" data-hero="6">
+        <a class="btn btn--primary btn--lg btn--glow" href="#download" data-magnetic>
+          <span class="btn__label">Download Client</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="https://discord.gg/azyron" target="_blank" rel="noopener" data-magnetic>
+          <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 8.4a9.9 9.9 0 0 1 6.8 0M8.3 15.6a7.8 7.8 0 0 0 7.4 0M9.1 13.4a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm5.8 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15.8 5.2A13 13 0 0 0 12 4.4a13 13 0 0 0-3.8.8C5.5 8.2 5 11.4 5 14.4a12 12 0 0 0 3.6 1.8l.7-1.2m6.4-9.8c2.7 3 3.2 6.2 3.2 9.2a12 12 0 0 1-3.6 1.8l-.7-1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="btn__label">Join Discord</span>
+        </a>
+      </div>
+
+      <div class="hero__meta" data-hero="7">
+        <span><i class="pulse-dot"></i>SERVER-SAFE BUILD</span>
+        <span>v2.4.1</span>
+        <span>ANDROID 8.0+</span>
+        <span>47.2 MB</span>
+      </div>
+    </div>
+
+    <div class="hero__stats" data-hero="8">
+      <div class="hstat">
+        <span class="hstat__num" data-count="24600" data-suffix="+">0</span>
+        <span class="hstat__label">ACTIVE PLAYERS</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat__num" data-count="312" data-prefix="+" data-suffix="%">0</span>
+        <span class="hstat__label">AVG. FPS GAIN</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat__num" data-count="4.9" data-decimals="1">0</span>
+        <span class="hstat__label">COMMUNITY RATING</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat__num" data-count="60" data-suffix="+">0</span>
+        <span class="hstat__label">SUPPORTED VERSIONS</span>
+      </div>
+    </div>
+
+    <a class="hero__scroll" href="#features" aria-label="Scroll to features">
+      <span class="hero__scroll-line"></span>
+      <span>SCROLL</span>
+    </a>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>FPS OPTIMIZATION</span><i>◆</i><span>CUSTOM HUD</span><i>◆</i><span>ZERO STUTTER</span><i>◆</i><span>MOD SUPPORT</span><i>◆</i><span>PERFORMANCE PROFILES</span><i>◆</i><span>120FPS INTERFACE</span><i>◆</i><span>1.21.11 READY</span><i>◆</i>
+      <span>FPS OPTIMIZATION</span><i>◆</i><span>CUSTOM HUD</span><i>◆</i><span>ZERO STUTTER</span><i>◆</i><span>MOD SUPPORT</span><i>◆</i><span>PERFORMANCE PROFILES</span><i>◆</i><span>120FPS INTERFACE</span><i>◆</i><span>1.21.11 READY</span><i>◆</i>
+    </div>
+  </div>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section features" id="features">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow" data-reveal><span class="eyebrow__sq"></span>01 / FEATURES</p>
+        <h2 class="sec-title" data-reveal>
+          EVERY FRAME.<br><em>ENGINEERED.</em>
+        </h2>
+        <p class="sec-lede" data-reveal>
+          Six systems working as one. No bloat, no filler modules — just the tools that make
+          Minecraft feel the way it always should have.
+        </p>
+      </header>
+
+      <div class="feat-grid">
+        <article class="feat" data-tilt data-reveal>
+          <div class="feat__glow"></div>
+          <span class="feat__index">01</span>
+          <span class="feat__icon">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 26V15m6 11V9m6 17V19m6 7V5m6 21V12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+          </span>
+          <h3 class="feat__title">FPS Optimization</h3>
+          <p class="feat__text">A rebuilt render pipeline that culls hidden geometry, pre-bakes chunk meshes and ships a leaner runtime. Same hardware, up to three times the frames.</p>
+          <ul class="feat__tags"><li>Chunk Culling</li><li>JIT Tuning</li><li>GPU Sync</li></ul>
+          <span class="feat__corner feat__corner--tl"></span>
+          <span class="feat__corner feat__corner--br"></span>
+        </article>
+
+        <article class="feat" data-tilt data-reveal>
+          <div class="feat__glow"></div>
+          <span class="feat__index">02</span>
+          <span class="feat__icon">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 18c3 0 3-6 6-6s3 10 6 10 3-14 6-14 3 8 6 8 2-4 4-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3 class="feat__title">Smooth Gameplay</h3>
+          <p class="feat__text">Adaptive frame pacing, asynchronous world loading and a garbage collector tuned for tick stability — your 1% lows stay high when the fight starts.</p>
+          <ul class="feat__tags"><li>Frame Pacing</li><li>Async Chunks</li><li>1% Lows</li></ul>
+          <span class="feat__corner feat__corner--tl"></span>
+          <span class="feat__corner feat__corner--br"></span>
+        </article>
+
+        <article class="feat" data-tilt data-reveal>
+          <div class="feat__glow"></div>
+          <span class="feat__index">03</span>
+          <span class="feat__icon">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 4 8v9c0 6.5 5 10.6 12 12 7-1.4 12-5.5 12-12V8L16 3Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M11 16.2l3.4 3.4L21.5 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+          </span>
+          <h3 class="feat__title">Custom Mods</h3>
+          <p class="feat__text">Browse, install and hot-swap mods inside the client. Curated, verified builds for Fabric, Forge and NeoForge — updated without touching a config file.</p>
+          <ul class="feat__tags"><li>Fabric</li><li>Forge</li><li>NeoForge</li></ul>
+          <span class="feat__corner feat__corner--tl"></span>
+          <span class="feat__corner feat__corner--br"></span>
+        </article>
+
+        <article class="feat" data-tilt data-reveal>
+          <div class="feat__glow"></div>
+          <span class="feat__index">04</span>
+          <span class="feat__icon">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 24V13m11 11V8m11 16V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/><circle cx="5" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="4.5" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="27" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <h3 class="feat__title">Performance Profiles</h3>
+          <p class="feat__text">One tap between Competitive, Balanced and Cinematic. Render distance, particles, mipmaps and GC flags remap instantly — and the client remembers per instance.</p>
+          <ul class="feat__tags"><li>Presets</li><li>Auto-Tune</li><li>Per Instance</li></ul>
+          <span class="feat__corner feat__corner--tl"></span>
+          <span class="feat__corner feat__corner--br"></span>
+        </article>
+
+        <article class="feat" data-tilt data-reveal>
+          <div class="feat__glow"></div>
+          <span class="feat__index">05</span>
+          <span class="feat__icon">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="18" rx="1.5" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M3 10h26M12 23v4m8-4v4M8 27h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="square"/><path d="M8 15h5m-5 3h8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>
+          </span>
+          <h3 class="feat__title">Custom HUD</h3>
+          <p class="feat__text">Drag, scale and restyle every widget with pixel snapping. Keystrokes, CPS, armour, potions, FPS graphs and a fully modular scoreboard — yours to arrange.</p>
+          <ul class="feat__tags"><li>Drag &amp; Drop</li><li>Modular</li><li>Pixel Snap</li></ul>
+          <span class="feat__corner feat__corner--tl"></span>
+          <span class="feat__corner feat__corner--br"></span>
+        </article>
+
+        <article class="feat" data-tilt data-reveal>
+          <div class="feat__glow"></div>
+          <span class="feat__index">06</span>
+          <span class="feat__icon">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5 27 9v14L16 28.5 5 23V9L16 3.5Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M16 10.5 21.5 13v6L16 21.5 10.5 19v-6L16 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </span>
+          <h3 class="feat__title">Premium User Interface</h3>
+          <p class="feat__text">A glass-forged dark interface with 120fps transitions, full keyboard navigation and zero bloat. Every screen rebuilt from the first pixel by hand.</p>
+          <ul class="feat__tags"><li>Zero Bloat</li><li>120fps UI</li><li>A11y Ready</li></ul>
+          <span class="feat__corner feat__corner--tl"></span>
+          <span class="feat__corner feat__corner--br"></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HUD SHOWCASE ============ -->
+  <section class="section hud-section" aria-labelledby="hud-title">
+    <div class="wrap">
+      <div class="hud-panel" data-reveal>
+        <div class="hud-panel__bg" aria-hidden="true">
+          <img src="assets/img/shot-base.webp" alt="" width="1376" height="768" loading="lazy" decoding="async">
+        </div>
+        <div class="hud-panel__scrim"></div>
+
+        <!-- live in-game HUD mock -->
+        <div class="hud" aria-hidden="true">
+          <div class="hud__top-left">
+            <div class="hud__logo">AZYRON<span>CLIENT</span></div>
+            <div class="hud__chip">PROFILE <b>COMPETITIVE</b></div>
+          </div>
+
+          <div class="hud__top-right">
+            <div class="hud__fps"><b id="hudFps">247</b><span>FPS</span></div>
+            <div class="hud__graph"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="hud__ping">PING <b>12<em>ms</em></b></div>
+          </div>
+
+          <div class="hud__crosshair"><span></span></div>
+
+          <div class="hud__score">
+            <p><span>AZYRON</span><b>12</b></p>
+            <p><span>ENEMY</span><b>7</b></p>
+            <i></i>
+            <p class="hud__score-sub"><span>TIME</span><b>04:37</b></p>
+          </div>
+
+          <div class="hud__left">
+            <div class="hud__effects">
+              <p><i class="eff eff--1"></i>SPEED <b>2:14</b></p>
+              <p><i class="eff eff--2"></i>FIRE RES <b>1:02</b></p>
+            </div>
+            <div class="hud__coords">
+              <p>XYZ <b>128 / 74 / -412</b></p>
+              <p>BIOME <b>AMETHYST HOLLOW</b></p>
+            </div>
+          </div>
+
+          <div class="hud__keys">
+            <div class="hud__keyrow"><i data-key="W">W</i></div>
+            <div class="hud__keyrow"><i data-key="A">A</i><i data-key="S">S</i><i data-key="D">D</i></div>
+            <div class="hud__keyrow hud__keyrow--wide">
+              <i data-key="LMB" class="key--mouse">LMB</i>
+              <i data-key="RMB" class="key--mouse">RMB</i>
+            </div>
+            <p class="hud__cps">CPS <b id="hudCps">8</b></p>
+          </div>
+
+          <div class="hud__hotbar">
+            <span class="slot slot--sword"></span>
+            <span class="slot slot--pick"></span>
+            <span class="slot slot--blocks"></span>
+            <span class="slot slot--pearl"></span>
+            <span class="slot slot--potion is-active"></span>
+            <span class="slot slot--bow"></span>
+            <span class="slot"></span>
+            <span class="slot"></span>
+            <span class="slot"></span>
+          </div>
+
+          <div class="hud__hearts"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="hud-panel__caption">
+          <p class="eyebrow"><span class="eyebrow__sq"></span>LIVE HUD PREVIEW</p>
+          <h2 class="hud-panel__title" id="hud-title">YOUR SCREEN.<br><em>YOUR RULES.</em></h2>
+          <p>Every module is draggable, every colour is yours. This is the AZYRON default — imagine what yours looks like.</p>
+          <button class="btn btn--ghost btn--sm hud-panel__btn" id="hudToggle" type="button" aria-pressed="true">
+            <span class="btn__dot"></span><span class="btn__label">HUD ON</span>
+          </button>
+        </div>
+        <span class="hud-panel__frame" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PERFORMANCE ============ -->
+  <section class="section perf" id="performance">
+    <div class="wrap">
+      <header class="sec-head sec-head--split">
+        <div>
+          <p class="eyebrow" data-reveal><span class="eyebrow__sq"></span>02 / PERFORMANCE</p>
+          <h2 class="sec-title" data-reveal>FRAMES YOU<br><em>CAN FEEL.</em></h2>
+        </div>
+        <p class="sec-lede sec-lede--right" data-reveal>
+          Same world. Same device. One client that refuses to waste a tick. Pick a profile and
+          watch the benchmark react in real time.
+        </p>
+      </header>
+
+      <div class="perf-grid">
+        <div class="perf-card" data-reveal>
+          <div class="perf-card__head">
+            <p class="perf-card__label">BENCHMARK — 60 SECOND SESSION</p>
+            <div class="perf-tabs" role="group" aria-label="Performance profile">
+              <button class="perf-tab is-active" type="button" aria-pressed="true" data-profile="competitive">COMPETITIVE</button>
+              <button class="perf-tab" type="button" aria-pressed="false" data-profile="balanced">BALANCED</button>
+              <button class="perf-tab" type="button" aria-pressed="false" data-profile="cinematic">CINEMATIC</button>
+            </div>
+          </div>
+
+          <div class="perf-readout">
+            <div class="perf-readout__main">
+              <span class="perf-readout__num" id="perfFps">247</span>
+              <span class="perf-readout__unit">FPS<em>AVG</em></span>
+            </div>
+            <div class="perf-readout__delta">
+              <span id="perfGain">+305%</span>
+              <em>VS. VANILLA</em>
+            </div>
+            <div class="perf-readout__sub">
+              <p><span>1% LOW</span><b id="perfLow">198</b></p>
+              <p><span>FRAME TIME</span><b id="perfFrame">4.0<em>ms</em></b></p>
+              <p><span>RESOLUTION</span><b>1080p</b></p>
+            </div>
+          </div>
+
+          <div class="chart">
+            <canvas id="perfChart" height="240" aria-label="Frame rate graph comparing vanilla Minecraft with AZYRON CLIENT"></canvas>
+            <div class="chart__legend">
+              <span><i class="lg lg--azyron"></i>AZYRON CLIENT</span>
+              <span><i class="lg lg--vanilla"></i>VANILLA</span>
+            </div>
+            <div class="chart__axis"><span>0s</span><span>15s</span><span>30s</span><span>45s</span><span>60s</span></div>
+          </div>
+
+          <div class="perf-bars">
+            <div class="pbar">
+              <span class="pbar__name">VANILLA</span>
+              <span class="pbar__track"><i class="pbar__fill pbar__fill--vanilla" id="barVanilla"></i></span>
+              <span class="pbar__val" id="valVanilla">61</span>
+            </div>
+            <div class="pbar">
+              <span class="pbar__name">AZYRON</span>
+              <span class="pbar__track"><i class="pbar__fill pbar__fill--azyron" id="barAzyron"></i></span>
+              <span class="pbar__val" id="valAzyron">247</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="perf-side">
+          <div class="stat-tile" data-reveal>
+            <span class="stat-tile__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20 12 4l9 16H3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 14h7" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <b class="stat-tile__num" data-count="312" data-prefix="+" data-suffix="%">0</b>
+            <span class="stat-tile__label">FPS UPLIFT ON MID-RANGE HARDWARE</span>
+          </div>
+          <div class="stat-tile" data-reveal>
+            <span class="stat-tile__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <b class="stat-tile__num" data-count="64" data-prefix="-" data-suffix="%">0</b>
+            <span class="stat-tile__label">AVERAGE FRAME TIME REDUCTION</span>
+          </div>
+          <div class="stat-tile" data-reveal>
+            <span class="stat-tile__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <b class="stat-tile__num" data-count="1.8" data-decimals="1" data-suffix="ms">0</b>
+            <span class="stat-tile__label">INPUT LATENCY, MEASURED END-TO-END</span>
+          </div>
+          <div class="stat-tile stat-tile--accent" data-reveal>
+            <span class="stat-tile__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17V9m5 8V5m5 12v-6m5 6V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>
+            </span>
+            <b class="stat-tile__num" data-count="214" data-prefix="+" data-suffix="%">0</b>
+            <span class="stat-tile__label">BETTER 1% LOW FRAMERATE</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="compat" data-reveal>
+        <span class="compat__label">RUNS BESIDE</span>
+        <ul class="compat__list">
+          <li>SODIUM</li><li>LITHIUM</li><li>IRIS SHADERS</li><li>FABRIC API</li><li>FORGE</li><li>NEOFORGE</li><li>OPTIFINE</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section class="section shots" id="screenshots">
+    <div class="wrap">
+      <header class="sec-head sec-head--split">
+        <div>
+          <p class="eyebrow" data-reveal><span class="eyebrow__sq"></span>03 / SCREENSHOTS</p>
+          <h2 class="sec-title" data-reveal>CAPTURED IN<br><em>THE WILD.</em></h2>
+        </div>
+        <p class="sec-lede sec-lede--right" data-reveal>
+          Straight from the community. No fake renders, no touched-up marketing frames —
+          just AZYRON running on real hardware.
+        </p>
+      </header>
+
+      <div class="gallery" id="gallery">
+        <button class="shot shot--wide" data-full="assets/img/shot-village.webp" data-caption="Sunset Village — shader profile: Cinematic" data-reveal>
+          <img src="assets/img/shot-village.webp" alt="Minecraft village at sunset with glowing lanterns and reflective water" width="1376" height="768" loading="lazy" decoding="async">
+          <span class="shot__meta"><em>01</em><b>Sunset Village</b><i>Cinematic</i></span>
+          <span class="shot__zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        </button>
+
+        <button class="shot" data-full="assets/img/shot-arena.webp" data-caption="Azyron Arena — PvP spawn build" data-reveal>
+          <img src="assets/img/shot-arena.webp" alt="Floating obsidian PvP arena with neon purple light beams at night" width="1376" height="768" loading="lazy" decoding="async">
+          <span class="shot__meta"><em>02</em><b>Azyron Arena</b><i>Competitive</i></span>
+          <span class="shot__zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        </button>
+
+        <button class="shot" data-full="assets/img/shot-nether.webp" data-caption="Nether Bridge — portal run, 4.0ms frame time" data-reveal>
+          <img src="assets/img/shot-nether.webp" alt="Nether fortress bridge over lava with a glowing purple portal" width="1376" height="768" loading="lazy" decoding="async">
+          <span class="shot__meta"><em>03</em><b>Nether Bridge</b><i>Balanced</i></span>
+          <span class="shot__zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        </button>
+
+        <button class="shot shot--tall" data-full="assets/img/shot-cave.webp" data-caption="Amethyst Hollow — bloom + volumetric fog on" data-reveal>
+          <img src="assets/img/shot-cave.webp" alt="Underground amethyst geode cave glowing purple" width="1376" height="768" loading="lazy" decoding="async">
+          <span class="shot__meta"><em>04</em><b>Amethyst Hollow</b><i>Cinematic</i></span>
+          <span class="shot__zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        </button>
+
+        <button class="shot" data-full="assets/img/shot-mountain.webp" data-caption="Frostpeak — aurora night, 198 FPS 1% low" data-reveal>
+          <img src="assets/img/shot-mountain.webp" alt="Snowy taiga mountains under a purple aurora at night" width="1376" height="768" loading="lazy" decoding="async">
+          <span class="shot__meta"><em>05</em><b>Frostpeak</b><i>Balanced</i></span>
+          <span class="shot__zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        </button>
+
+        <button class="shot shot--wide" data-full="assets/img/shot-base.webp" data-caption="Neon Citadel — community mega base" data-reveal>
+          <img src="assets/img/shot-base.webp" alt="Futuristic quartz and black mega base with neon purple lighting reflected in water" width="1376" height="768" loading="lazy" decoding="async">
+          <span class="shot__meta"><em>06</em><b>Neon Citadel</b><i>Cinematic</i></span>
+          <span class="shot__zoom"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOWNLOAD ============ -->
+  <section class="section download" id="download">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow" data-reveal><span class="eyebrow__sq"></span>04 / DOWNLOAD</p>
+        <h2 class="sec-title" data-reveal>GET THE CLIENT.<br><em>OWN THE GAME.</em></h2>
+        <p class="sec-lede" data-reveal>Free to download. No ads, no watermarks, no bundled miners — just a faster Minecraft.</p>
+      </header>
+
+      <div class="dl-grid">
+        <div class="dl-card dl-card--primary" data-reveal>
+            <div class="dl-card__top">
+            <div class="dl-card__badge"><i class="pulse-dot"></i>LATEST STABLE</div>
+            <span class="dl-card__ver">v2.4.1</span>
+          </div>
+          <div class="dl-card__body">
+            <span class="dl-card__icon">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 6.5h6M14.5 25.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 10.5v7m0 0 2.6-2.6M16 17.5l-2.6-2.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+            <div>
+              <h3 class="dl-card__title">AZYRON Launcher</h3>
+              <p class="dl-card__sub">Minecraft: Java Edition on Android</p>
+            </div>
+          </div>
+          <dl class="dl-specs">
+            <div><dt>File</dt><dd>azyron-client-v2.4.1.apk</dd></div>
+            <div><dt>Size</dt><dd>47.2 MB</dd></div>
+            <div><dt>Requires</dt><dd>Android 8.0+</dd></div>
+            <div><dt>Released</dt><dd>Nov 02, 2026</dd></div>
+          </dl>
+          <div class="dl-checksum">
+            <span>SHA-256</span>
+            <code id="checksum">9f4c7a1e83b2d605f94c8e1a7b3d2c60ab54e91d7f0c3a8625b6e4f19d0c7b3a</code>
+            <button class="copy-btn" id="copyChecksum" type="button" aria-label="Copy checksum">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15 6.5V5a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 4 5v8a1.5 1.5 0 0 0 1.5 1.5H7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <a class="btn btn--primary btn--block btn--glow" href="https://github.com/AzyronClientteam" target="_blank" rel="noopener" data-magnetic>
+            <span class="btn__label">Download APK</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="dl-note">Direct download · <a href="https://github.com/AzyronClientteam" target="_blank" rel="noopener">GitHub mirror</a> · <a href="https://discord.gg/azyron" target="_blank" rel="noopener">Discord builds</a></p>
+        </div>
+
+        <div class="dl-card" data-reveal>
+          <div class="dl-card__top">
+            <div class="dl-card__badge dl-card__badge--quiet">JAVA CORE</div>
+            <span class="dl-card__ver">BUILD 4210</span>
+          </div>
+          <div class="dl-card__body">
+            <span class="dl-card__icon">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5 27 9v14L16 28.5 5 23V9L16 3.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10.5 21.5 13v6L16 21.5 10.5 19v-6L16 10.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <h3 class="dl-card__title">AZYRON Core</h3>
+              <p class="dl-card__sub">Drop-in client module for your instance</p>
+            </div>
+          </div>
+          <div class="ver-pills" role="group" aria-label="Choose a Java core version">
+            <button class="ver-pill is-active" type="button">1.21.11<span>2.8 MB</span></button>
+            <button class="ver-pill" type="button">26.1<span>2.9 MB</span></button>
+            <button class="ver-pill" type="button">26.2<span>3.1 MB</span></button>
+          </div>
+          <ul class="dl-list">
+            <li>Fabric Loader 0.16+ / Forge compatible</li>
+            <li>Java 17 and 21 runtimes bundled</li>
+            <li>Auto-updating module registry</li>
+          </ul>
+          <a class="btn btn--ghost btn--block" href="https://github.com/AzyronClientteam" target="_blank" rel="noopener">
+            <span class="btn__label">Get the Core</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="dl-reqs" data-reveal>
+          <h3>System requirements</h3>
+          <ul>
+            <li><span>OS</span><b>Android 8.0 or newer</b></li>
+            <li><span>RAM</span><b>3 GB minimum · 6 GB recommended</b></li>
+            <li><span>Storage</span><b>800 MB free for a full instance</b></li>
+            <li><span>CPU</span><b>ARM64 · 4 cores recommended</b></li>
+            <li><span>GPU</span><b>OpenGL ES 3.0+</b></li>
+          </ul>
+          <p class="dl-reqs__note">Runs on the custom AZYRON Java core, built on the open-source PojavLauncher runtime.</p>
+        </div>
+
+        <div class="dl-notes" data-reveal>
+          <h3>What's new in 2.4.1</h3>
+          <ol class="timeline">
+            <li><span>NOV 02</span><p><b>1.21.11 support</b> — full compatibility with the latest Java release, plus 26.1 and 26.2 builds.</p></li>
+            <li><span>OCT 21</span><p><b>New render scheduler</b> — up to 18% higher 1% lows on mid-range devices.</p></li>
+            <li><span>OCT 09</span><p><b>HUD Studio 2</b> — limitless modules, pixel snapping and per-server profiles.</p></li>
+            <li><span>SEP 28</span><p><b>Crash auto-fix</b> — reads the log, finds the cause and repairs the instance in one tap.</p></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section faq" id="faq">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="faq-side">
+        <header class="sec-head sec-head--faq">
+          <p class="eyebrow" data-reveal><span class="eyebrow__sq"></span>05 / FAQ</p>
+          <h2 class="sec-title" data-reveal>QUESTIONS,<br><em>ANSWERED.</em></h2>
+          <p class="sec-lede" data-reveal>Still stuck? The Discord is open 24/7 and someone always answers.</p>
+          <a class="btn btn--ghost" href="https://discord.gg/azyron" target="_blank" rel="noopener" data-reveal>
+            <span class="btn__label">Ask the community</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </header>
+        </div>
+
+        <div class="accordion" id="accordion">
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="true" aria-controls="acc1" id="accb1"><span class="acc__num">01</span><span>Is AZYRON CLIENT free?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc1" role="region" aria-labelledby="accb1"><div class="acc__inner"><p>Yes. The full client — FPS optimization, profiles, HUD Studio and mod support — is free to download and use. A supporter tier adds cosmetic capes, name colours and early access builds, and that funds development.</p></div></div>
+          </div>
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc2" id="accb2"><span class="acc__num">02</span><span>Which Minecraft versions are supported?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc2" role="region" aria-labelledby="accb2"><div class="acc__inner"><p>AZYRON runs Minecraft: Java Edition 1.8.9 through 1.21.11. The current Core build ships for 1.21.11, 26.1 and 26.2, and older versions are auto-patched with the legacy compatibility layer.</p></div></div>
+          </div>
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc3" id="accb3"><span class="acc__num">03</span><span>Will I get banned on servers?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc3" role="region" aria-labelledby="accb3"><div class="acc__inner"><p>AZYRON contains no combat cheats. Every module is visual or performance related, and the client passes on all major anti-cheats. Use it on any server that permits client-side performance mods — that is standard on nearly every network.</p></div></div>
+          </div>
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc4" id="accb4"><span class="acc__num">04</span><span>Do I need a powerful phone?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc4" role="region" aria-labelledby="accb4"><div class="acc__inner"><p>No. AZYRON is designed around low-end and mid-range hardware first. A 3 GB Android 8.0 device can hold a stable 60 FPS on the Competitive profile; 6 GB and up lets you push Cinematic with shaders.</p></div></div>
+          </div>
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc5" id="accb5"><span class="acc__num">05</span><span>How do I install it?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc5" role="region" aria-labelledby="accb5"><div class="acc__inner"><p>Download the APK, allow installation from your browser, open AZYRON and sign in with your Microsoft account. Pick a version, choose a profile and hit launch. The whole setup takes under two minutes.</p></div></div>
+          </div>
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc6" id="accb6"><span class="acc__num">06</span><span>Can I use my own mods and resource packs?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc6" role="region" aria-labelledby="accb6"><div class="acc__inner"><p>Absolutely. Import any .jar, resource pack or shader pack into an instance, or install straight from Modrinth and CurseForge inside the client. AZYRON never locks you into its own ecosystem.</p></div></div>
+          </div>
+          <div class="acc" data-reveal>
+            <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="acc7" id="accb7"><span class="acc__num">07</span><span>Is AZYRON affiliated with Mojang or Microsoft?</span><i class="acc__sign"></i></button></h3>
+            <div class="acc__panel" id="acc7" role="region" aria-labelledby="accb7"><div class="acc__inner"><p>No. AZYRON CLIENT is an independent, unofficial client created by JIGNESH GAMING. It is not approved by or associated with Mojang Studios or Microsoft. A valid Minecraft: Java Edition account is required to play.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISCORD ============ -->
+  <section class="section discord" id="discord">
+    <div class="wrap">
+      <div class="dc" data-reveal>
+        <div class="dc__bg" aria-hidden="true"><img src="assets/img/shot-desert.webp" alt="" width="1376" height="768" loading="lazy" decoding="async"></div>
+        <div class="dc__glow" aria-hidden="true"></div>
+        <div class="dc__inner">
+          <div class="dc__left">
+            <p class="eyebrow"><span class="eyebrow__sq"></span>06 / COMMUNITY</p>
+            <h2 class="dc__title">THE SERVER<br>NEVER <em>SLEEPS.</em></h2>
+            <p class="dc__text">Screenshots, configs, PvP nights and beta builds land in Discord first. Come for the client, stay for the people.</p>
+            <div class="dc__stats">
+              <div><b class="dc__num" data-count="12480" data-suffix="">0</b><span>MEMBERS</span></div>
+              <div><b class="dc__num" data-count="2300" data-suffix="+">0</b><span>ONLINE NOW</span></div>
+              <div><b class="dc__num" data-count="18" data-suffix="">0</b><span>EVENTS / MONTH</span></div>
+            </div>
+            <a class="btn btn--primary btn--lg btn--glow" href="https://discord.gg/azyron" target="_blank" rel="noopener" data-magnetic>
+              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 8.4a9.9 9.9 0 0 1 6.8 0M8.3 15.6a7.8 7.8 0 0 0 7.4 0M9.1 13.4a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm5.8 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15.8 5.2A13 13 0 0 0 12 4.4a13 13 0 0 0-3.8.8C5.5 8.2 5 11.4 5 14.4a12 12 0 0 0 3.6 1.8l.7-1.2m6.4-9.8c2.7 3 3.2 6.2 3.2 9.2a12 12 0 0 1-3.6 1.8l-.7-1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="btn__label">Join Discord</span>
+              <span class="btn__kbd">12,480 IN</span>
+            </a>
+          </div>
+
+          <div class="dc__right" aria-hidden="true">
+            <div class="dc-card">
+              <div class="dc-card__head">
+                <span class="dc-card__ico">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.8 5.2A13 13 0 0 0 12 4.4a13 13 0 0 0-3.8.8C5.5 8.2 5 11.4 5 14.4a12 12 0 0 0 3.6 1.8l.7-1.2m6.4-9.8c2.7 3 3.2 6.2 3.2 9.2a12 12 0 0 1-3.6 1.8l-.7-1.2M9.1 13.4a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm5.8 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+                </span>
+                <div><b>AZYRON COMMUNITY</b><span><i class="pulse-dot"></i>2,300 online · 12,480 members</span></div>
+              </div>
+              <div class="dc-channels">
+                <p class="dc-channels__cat">TEXT CHANNELS</p>
+                <p class="is-active"><span>#</span>announcements <b>NEW</b></p>
+                <p><span>#</span>general-chat</p>
+                <p><span>#</span>screenshots</p>
+                <p><span>#</span>configs-and-hud</p>
+                <p><span>#</span>support</p>
+                <p><span>#</span>beta-builds <b>NEW</b></p>
+              </div>
+              <div class="dc-msg">
+                <span class="dc-msg__av">J</span>
+                <div><b>JIGNESH GAMING <em>OWNER</em></b><p>v2.4.1 is live for everyone. 1.21.11 is smooth as butter — drop your feedback in <span>#support</span> 🟣</p></div>
+              </div>
+              <div class="dc-msg dc-msg--alt">
+                <span class="dc-msg__av">A</span>
+                <div><b>AZYRON <em>BOT</em></b><p>New build deployed · 1,204 players updated in the last hour.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-foot">
+  <div class="site-foot__glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="site-foot__top">
+      <div class="site-foot__brand">
+        <a class="brand brand--foot" href="#home" aria-label="AZYRON CLIENT — back to top">
+          <span class="brand__mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 2.6 59 17.3v29.4L32 61.4 5 46.7V17.3Z" fill="rgba(168,85,247,.07)" stroke="url(#gradSilver)" stroke-width="1.7"/>
+              <path d="M22 46.6 32 15.2l10 31.4" fill="none" stroke="url(#gradNeon)" stroke-width="5.4"/>
+              <path d="M26.2 35.4h11.6" fill="none" stroke="url(#gradNeon)" stroke-width="4.6"/>
+            </svg>
+          </span>
+          <span class="brand__text">AZYRON<em>CLIENT</em></span>
+        </a>
+        <p>Unleash your Minecraft experience.<br>A premium Java client forged for frames.</p>
+        <div class="site-foot__socials">
+          <a href="https://discord.gg/azyron" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.8 5.2A13 13 0 0 0 12 4.4a13 13 0 0 0-3.8.8C5.5 8.2 5 11.4 5 14.4a12 12 0 0 0 3.6 1.8l.7-1.2m6.4-9.8c2.7 3 3.2 6.2 3.2 9.2a12 12 0 0 1-3.6 1.8l-.7-1.2M9.1 13.4a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm5.8 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+          <a href="https://github.com/AzyronClientteam" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19.5c-4 1.2-4-2-5.5-2.5m11 5v-3.4c0-1 .1-1.4-.5-2 2.3-.3 4.5-1.2 4.5-5.2a4 4 0 0 0-1.1-2.8 3.7 3.7 0 0 0-.1-2.8s-1.1-.3-3.4 1.3a11.4 11.4 0 0 0-6 0C5.5 5.4 4.4 5.7 4.4 5.7a3.7 3.7 0 0 0-.1 2.8A4 4 0 0 0 3.2 11c0 4 2.2 4.9 4.5 5.2-.6.6-.6 1.2-.5 2v3.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="https://github.com/AzyronClientteam" target="_blank" rel="noopener" aria-label="Releases"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10m0 0 4-4m-4 4-4-4M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="site-foot__cols" aria-label="Footer">
+        <div>
+          <h4>Client</h4>
+          <a href="#download">Download</a>
+          <a href="#download">Versions</a>
+          <a href="#download">Release notes</a>
+          <a href="#performance">Performance</a>
+        </div>
+        <div>
+          <h4>Community</h4>
+          <a href="https://discord.gg/azyron" target="_blank" rel="noopener">Discord</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://discord.gg/azyron" target="_blank" rel="noopener">Support</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="https://github.com/AzyronClientteam/Azyron-client-Website-/blob/main/PRIVACY_POLICY_en" target="_blank" rel="noopener">Privacy</a>
+          <a href="https://github.com/AzyronClientteam/Azyron-client-Website-/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+          <a href="https://github.com/AzyronClientteam/Azyron-client-Website-/blob/main/NOTICE" target="_blank" rel="noopener">Notice</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="site-foot__giant" aria-hidden="true">AZYRON</div>
+
+    <div class="site-foot__bottom">
+      <p>© <span id="year">2026</span> AZYRON CLIENT. Crafted by <b>JIGNESH GAMING</b>.</p>
+      <p class="site-foot__disc">Not affiliated with Mojang Studios or Microsoft. Minecraft is a trademark of Mojang Synergies AB.</p>
+      <a class="to-top" href="#home" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5m0 0-6 6m6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden>
+  <div class="lightbox__backdrop" data-lb-close></div>
+  <div class="lightbox__stage">
+    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <p class="lightbox__cap"><span id="lightboxCount">01 / 06</span><b id="lightboxCap">Caption</b></p>
+  </div>
+  <button class="lightbox__close" type="button" data-lb-close aria-label="Close viewer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" id="lbPrev" aria-label="Previous screenshot">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--next" type="button" id="lbNext" aria-label="Next screenshot">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="toast__dot"></span><span id="toastText">Copied</span></div>
+
+<noscript>
+  <style>
+    html.is-loading{overflow:auto}
+    .loader,.curtain,.cursor{display:none !important}
+    [data-hero]{opacity:1 !important;transform:none !important;filter:none !important;animation:none !important}
+    [data-reveal]{opacity:1 !important;translate:none !important}
+  </style>
+  <div class="noscript">AZYRON CLIENT works best with JavaScript enabled. All content and downloads remain fully accessible.</div>
+</noscript>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

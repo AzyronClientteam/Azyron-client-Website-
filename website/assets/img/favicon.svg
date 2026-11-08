@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AZYRON CLIENT">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#150E26"/>
+      <stop offset="1" stop-color="#050309"/>
+    </linearGradient>
+    <linearGradient id="a" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5B21B6"/>
+      <stop offset=".5" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#F0E2FF"/>
+    </linearGradient>
+    <linearGradient id="s" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".55" stop-color="#C9CEE0"/>
+      <stop offset="1" stop-color="#7E849C"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="13" fill="url(#bg)"/>
+  <rect x=".75" y=".75" width="62.5" height="62.5" rx="12.5" fill="none" stroke="#A855F7" stroke-opacity=".28" stroke-width="1.5"/>
+  <path d="M32 9.5 52.6 20.75v22.5L32 54.5 11.4 43.25v-22.5Z" fill="none" stroke="url(#s)" stroke-width="1.9" stroke-linejoin="miter"/>
+  <path d="M23.2 44 32 18.4 40.8 44" fill="none" stroke="url(#a)" stroke-width="5.2" stroke-linejoin="miter"/>
+  <path d="M26.7 35h10.6" stroke="url(#a)" stroke-width="4.4" stroke-linecap="butt"/>
+</svg>

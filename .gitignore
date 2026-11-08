@@ -27,3 +27,6 @@ fs-manager-udroid/
 
 # Agent local skills
 .agents/
+
+# Website build (source lives in /website)
+!website/index.html

@@ -129,6 +129,18 @@ Full changelogs are on the [Releases](https://github.com/craftstudioteam/CS-LAUN
 
 <br>
 
+## Website
+
+The marketing site for AZYRON CLIENT lives in [`docs/`](docs/) and is published with **GitHub Pages**:
+
+**https://azyronclientteam.github.io/Azyron-client-Website-/**
+
+- `docs/` is the publish root (`Settings → Pages → Branch: main / folder: /docs`).
+- No build step — plain HTML, CSS and vanilla JS.
+- Client builds in [`docs/downloads/`](docs/downloads/) are what the Download buttons serve.
+- Run it locally: `python3 -m http.server 5173 --directory docs`
+
+
 ## Support and community
 
 - **Discord:** https://discord.gg/dmteYqZZyY — help, announcements and feedback

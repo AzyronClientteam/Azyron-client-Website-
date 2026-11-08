@@ -23,7 +23,7 @@ Or with Node:
 npx serve website
 ```
 
-Deploy by uploading the `website/` folder to GitHub Pages, Netlify, Vercel, Cloudflare Pages
+Deploy by uploading the `docs/` folder to GitHub Pages, Netlify, Vercel, Cloudflare Pages
 or any bucket. There is nothing to compile.
 
 ---
@@ -31,7 +31,7 @@ or any bucket. There is nothing to compile.
 ## What's inside
 
 ```
-website/
+docs/
 ├── index.html                  → single page, all sections
 ├── robots.txt · sitemap.xml
 ├── site.webmanifest            → PWA-ish icon + theme metadata

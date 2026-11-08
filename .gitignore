@@ -29,4 +29,4 @@ fs-manager-udroid/
 .agents/
 
 # Website build (source lives in /website)
-!website/index.html
+!docs/index.html

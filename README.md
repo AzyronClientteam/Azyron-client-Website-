@@ -131,17 +131,15 @@ Full changelogs are on the [Releases](https://github.com/craftstudioteam/CS-LAUN
 
 ## Website
 
-The marketing site for AZYRON CLIENT lives in [`website/`](website/) — a hand-built,
-dependency-free static page with a dark violet/silver identity, animated loader, particle
-field, live FPS benchmark, HUD preview, screenshot lightbox and Discord section.
+The marketing site for AZYRON CLIENT lives in [`docs/`](docs/) and is published with **GitHub Pages**:
 
-```bash
-python3 -m http.server 5173 --directory website   # → http://localhost:5173
-```
+**https://azyronclientteam.github.io/Azyron-client-Website-/**
 
-See [`website/README.md`](website/README.md) for structure, customisation and deployment notes.
+- `docs/` is the publish root (`Settings → Pages → Branch: main / folder: /docs`).
+- No build step — plain HTML, CSS and vanilla JS.
+- Client builds in [`docs/downloads/`](docs/downloads/) are what the Download buttons serve.
+- Run it locally: `python3 -m http.server 5173 --directory docs`
 
-<br>
 
 ## Support and community
 

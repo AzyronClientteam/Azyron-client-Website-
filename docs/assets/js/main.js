@@ -920,11 +920,30 @@
   })();
 
   (function pills() {
+    var REL = 'downloads/';
+    var main = $('#dlMain'), core = $('#dlCore'), code = $('#checksum');
+    var nameEl = $('#dlFileName'), sizeEl = $('#dlFileSize');
+
     $$('.ver-pill').forEach(function (pill) {
       pill.addEventListener('click', function () {
         $$('.ver-pill').forEach(function (p) { p.classList.remove('is-active'); });
         pill.classList.add('is-active');
-        toast('AZYRON Core ' + pill.textContent.replace(/\d+\.\d+ MB/, '').trim() + ' selected');
+
+        var file = pill.getAttribute('data-file');
+        var size = pill.getAttribute('data-size');
+        var sha  = pill.getAttribute('data-sha');
+        var label = pill.firstChild ? pill.firstChild.textContent.trim() : pill.textContent.trim();
+
+        if (file) {
+          [main, core].forEach(function (a) {
+            if (a) { a.href = REL + file; a.setAttribute('download', file); }
+          });
+          if (nameEl) nameEl.textContent = file;
+          if (sizeEl) sizeEl.textContent = size || '';
+        }
+        if (sha && code) code.textContent = sha;
+
+        toast('AZYRON Core ' + label + ' selected');
       });
     });
   })();

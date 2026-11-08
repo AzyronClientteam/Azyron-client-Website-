@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://azyronclientteam.github.io/Azyron-client-Website-/sitemap.xml
